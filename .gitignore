@@ -29,3 +29,8 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+ /allure-report/
+/allure-results/
+/my-reports/
+/myreports/
+
