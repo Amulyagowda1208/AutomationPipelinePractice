@@ -44,7 +44,6 @@ jobs:
       - name: 📥 Checkout Repository 
         uses: actions/checkout@v4 
   
-https://www.pavanonlinetrainings.com   https://www.youtube.com/@sdetpavan 
  
       - name: 🟢 Set up Node.js 
         uses: actions/setup-node@v4 
