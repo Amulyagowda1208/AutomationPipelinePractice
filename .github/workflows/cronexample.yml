@@ -1,0 +1,21 @@
+name: Playwright Tests cron
+
+on:
+  push:
+    branches: main
+
+jobs:
+    greet1:
+     runs-on: ubuntu-latest
+     steps:
+     - run: echo "Good morning, team!"
+
+    greet2:
+     runs-on: ubuntu-latest
+     steps:
+     - run: echo "Good evening0, team!"
+    
+    greet3:
+     runs-on: ubuntu-latest
+     steps:
+     - run: echo "Good Afternoon, team!"
