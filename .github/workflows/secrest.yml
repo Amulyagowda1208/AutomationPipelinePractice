@@ -1,0 +1,76 @@
+name: Playwright Tests secrets
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+  workflow_dispatch:
+    inputs:
+      test_suite:
+        description: "Select test suite"
+        type: choice
+        options:
+          - test:master
+          - test:sanity
+          - test:regression
+          - test:e2e
+          - test:api
+          - test:web
+          - test:datadriven
+        default: "test:e2e"
+
+      browser:
+        description: "Select browser"
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+        default: "firefox"
+
+      mode:
+        description: "Run mode"
+        type: choice
+        options:
+          - headless
+          - headed
+        default: "headed"
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test --project=${{github.BROWSER_NAME}}
+
+      # Playwright HTML report
+      - name: Upload Playwright report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ github.run_number }}
+          path: playwright-report/
+          retention-days: 30
+
+      # Allure results
+      - name: Upload Allure results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-${{ github.run_number }}
+          path: allure-results/
+          retention-days: 30
