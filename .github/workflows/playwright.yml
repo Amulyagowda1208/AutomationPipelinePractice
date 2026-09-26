@@ -26,7 +26,7 @@ on:
           - chromium
           - firefox
           - webkit
-        default: "chromium"
+        default: "firefox"
 
       mode:
         description: "Run mode"
@@ -34,7 +34,7 @@ on:
         options:
           - headless
           - headed
-        default: "headless"
+        default: "headed"
 
 jobs:
   test:
@@ -55,7 +55,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test --project=${{github.BROWSER_NAME}}
 
       # Playwright HTML report
       - name: Upload Playwright report
