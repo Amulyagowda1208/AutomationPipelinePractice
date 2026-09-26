@@ -55,7 +55,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test --project=${{github.BROWSER_NAME}}
+        run: npx playwright test --project=${{secrets.BROWSER_NAME}}
 
       # Playwright HTML report
       - name: Upload Playwright report
