@@ -1,9 +1,9 @@
 name: Playwright Tests secrets
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
-
+  push:
+    branches: main
+    
   workflow_dispatch:
     inputs:
       test_suite:
