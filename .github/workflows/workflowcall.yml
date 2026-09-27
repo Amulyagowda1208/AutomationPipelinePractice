@@ -1,0 +1,33 @@
+name: Playwright Tests workflow call
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "Target deployment environment"
+        required: true
+        default: "staging"
+        type: string
+
+      message:
+        description: "Deployment Started"
+        required: true
+        default: "Good morning, team!"
+        type: string
+
+jobs:
+  greet1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying to ${{ inputs.environment }}"
+      - run: echo "${{ inputs.message }}"
+
+  greet2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Good evening, team!"
+
+  greet3:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Good Afternoon, team!"
